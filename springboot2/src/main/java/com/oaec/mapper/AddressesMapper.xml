@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oaec.mapper.AddressesMapper" >
+  <resultMap id="BaseResultMap" type="com.oaec.pojo.Addresses" >
+    <id column="address_id" property="addressId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="consignee_name" property="consigneeName" jdbcType="VARCHAR" />
+    <result column="consignee_tel" property="consigneeTel" jdbcType="VARCHAR" />
+    <result column="address_pro" property="addressPro" jdbcType="VARCHAR" />
+    <result column="address_city" property="addressCity" jdbcType="VARCHAR" />
+    <result column="address_detail" property="addressDetail" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    address_id, user_id, consignee_name, consignee_tel, address_pro, address_city, address_detail
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from addresses
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from addresses
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oaec.pojo.Addresses" >
+    insert into addresses (address_id, user_id, consignee_name, 
+      consignee_tel, address_pro, address_city, 
+      address_detail)
+    values (#{addressId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{consigneeName,jdbcType=VARCHAR}, 
+      #{consigneeTel,jdbcType=VARCHAR}, #{addressPro,jdbcType=VARCHAR}, #{addressCity,jdbcType=VARCHAR}, 
+      #{addressDetail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oaec.pojo.Addresses" >
+    insert into addresses
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="addressId != null" >
+        address_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="consigneeName != null" >
+        consignee_name,
+      </if>
+      <if test="consigneeTel != null" >
+        consignee_tel,
+      </if>
+      <if test="addressPro != null" >
+        address_pro,
+      </if>
+      <if test="addressCity != null" >
+        address_city,
+      </if>
+      <if test="addressDetail != null" >
+        address_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="addressId != null" >
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="consigneeName != null" >
+        #{consigneeName,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeTel != null" >
+        #{consigneeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="addressPro != null" >
+        #{addressPro,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCity != null" >
+        #{addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null" >
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oaec.pojo.Addresses" >
+    update addresses
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="consigneeName != null" >
+        consignee_name = #{consigneeName,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeTel != null" >
+        consignee_tel = #{consigneeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="addressPro != null" >
+        address_pro = #{addressPro,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCity != null" >
+        address_city = #{addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null" >
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oaec.pojo.Addresses" >
+    update addresses
+    set user_id = #{userId,jdbcType=INTEGER},
+      consignee_name = #{consigneeName,jdbcType=VARCHAR},
+      consignee_tel = #{consigneeTel,jdbcType=VARCHAR},
+      address_pro = #{addressPro,jdbcType=VARCHAR},
+      address_city = #{addressCity,jdbcType=VARCHAR},
+      address_detail = #{addressDetail,jdbcType=VARCHAR}
+    where address_id = #{addressId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oaec.mapper.UsersMapper" >
+  <resultMap id="BaseResultMap" type="com.oaec.pojo.Users" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="cartid" property="cartid" jdbcType="INTEGER" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="user_pwd" property="userPwd" jdbcType="VARCHAR" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="user_alive" property="userAlive" jdbcType="VARCHAR" />
+    <result column="user_lasttime" property="userLasttime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, cartid, user_account, user_pwd, user_email, user_alive, user_lasttime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from users
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oaec.pojo.Users" >
+    insert into users (user_id, cartid, user_account, 
+      user_pwd, user_email, user_alive, 
+      user_lasttime)
+    values (#{userId,jdbcType=INTEGER}, #{cartid,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, 
+      #{userPwd,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userAlive,jdbcType=VARCHAR}, 
+      #{userLasttime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oaec.pojo.Users" >
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="cartid != null" >
+        cartid,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="userPwd != null" >
+        user_pwd,
+      </if>
+      <if test="userEmail != null" >
+        user_email,
+      </if>
+      <if test="userAlive != null" >
+        user_alive,
+      </if>
+      <if test="userLasttime != null" >
+        user_lasttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="cartid != null" >
+        #{cartid,jdbcType=INTEGER},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userAlive != null" >
+        #{userAlive,jdbcType=VARCHAR},
+      </if>
+      <if test="userLasttime != null" >
+        #{userLasttime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oaec.pojo.Users" >
+    update users
+    <set >
+      <if test="cartid != null" >
+        cartid = #{cartid,jdbcType=INTEGER},
+      </if>
+      <if test="userAccount != null" >
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userAlive != null" >
+        user_alive = #{userAlive,jdbcType=VARCHAR},
+      </if>
+      <if test="userLasttime != null" >
+        user_lasttime = #{userLasttime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oaec.pojo.Users" >
+    update users
+    set cartid = #{cartid,jdbcType=INTEGER},
+      user_account = #{userAccount,jdbcType=VARCHAR},
+      user_pwd = #{userPwd,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_alive = #{userAlive,jdbcType=VARCHAR},
+      user_lasttime = #{userLasttime,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  
+  
+  <!-- 自己写的方法 -->
+  <select id="login" resultMap="BaseResultMap">
+  	select * from users where user_account=#{name} and user_pwd=#{pwd}
+  </select>
+  
+  
+</mapper>

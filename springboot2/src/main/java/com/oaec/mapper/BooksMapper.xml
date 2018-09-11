@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oaec.mapper.BooksMapper" >
+  <resultMap id="BaseResultMap" type="com.oaec.pojo.Books" >
+    <id column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+    <result column="book_count" property="bookCount" jdbcType="INTEGER" />
+    <result column="book_author" property="bookAuthor" jdbcType="VARCHAR" />
+    <result column="book_from" property="bookFrom" jdbcType="VARCHAR" />
+    <result column="book_fromtime" property="bookFromtime" jdbcType="VARCHAR" />
+    <result column="book_isbn" property="bookIsbn" jdbcType="VARCHAR" />
+    <result column="book_pic" property="bookPic" jdbcType="VARCHAR" />
+    <result column="book_price" property="bookPrice" jdbcType="REAL" />
+    <result column="book_comment" property="bookComment" jdbcType="VARCHAR" />
+    <result column="book_contentdes" property="bookContentdes" jdbcType="VARCHAR" />
+    <result column="book_authordes" property="bookAuthordes" jdbcType="VARCHAR" />
+    <result column="book_chapter" property="bookChapter" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    book_id, book_name, book_count, book_author, book_from, book_fromtime, book_isbn, 
+    book_pic, book_price, book_comment, book_contentdes, book_authordes, book_chapter
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from books
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from books
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.oaec.pojo.Books" >
+    insert into books (book_id, book_name, book_count, 
+      book_author, book_from, book_fromtime, 
+      book_isbn, book_pic, book_price, 
+      book_comment, book_contentdes, book_authordes, 
+      book_chapter)
+    values (#{bookId,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{bookCount,jdbcType=INTEGER}, 
+      #{bookAuthor,jdbcType=VARCHAR}, #{bookFrom,jdbcType=VARCHAR}, #{bookFromtime,jdbcType=VARCHAR}, 
+      #{bookIsbn,jdbcType=VARCHAR}, #{bookPic,jdbcType=VARCHAR}, #{bookPrice,jdbcType=REAL}, 
+      #{bookComment,jdbcType=VARCHAR}, #{bookContentdes,jdbcType=VARCHAR}, #{bookAuthordes,jdbcType=VARCHAR}, 
+      #{bookChapter,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oaec.pojo.Books" >
+    insert into books
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="bookName != null" >
+        book_name,
+      </if>
+      <if test="bookCount != null" >
+        book_count,
+      </if>
+      <if test="bookAuthor != null" >
+        book_author,
+      </if>
+      <if test="bookFrom != null" >
+        book_from,
+      </if>
+      <if test="bookFromtime != null" >
+        book_fromtime,
+      </if>
+      <if test="bookIsbn != null" >
+        book_isbn,
+      </if>
+      <if test="bookPic != null" >
+        book_pic,
+      </if>
+      <if test="bookPrice != null" >
+        book_price,
+      </if>
+      <if test="bookComment != null" >
+        book_comment,
+      </if>
+      <if test="bookContentdes != null" >
+        book_contentdes,
+      </if>
+      <if test="bookAuthordes != null" >
+        book_authordes,
+      </if>
+      <if test="bookChapter != null" >
+        book_chapter,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookName != null" >
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookCount != null" >
+        #{bookCount,jdbcType=INTEGER},
+      </if>
+      <if test="bookAuthor != null" >
+        #{bookAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="bookFrom != null" >
+        #{bookFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="bookFromtime != null" >
+        #{bookFromtime,jdbcType=VARCHAR},
+      </if>
+      <if test="bookIsbn != null" >
+        #{bookIsbn,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPic != null" >
+        #{bookPic,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPrice != null" >
+        #{bookPrice,jdbcType=REAL},
+      </if>
+      <if test="bookComment != null" >
+        #{bookComment,jdbcType=VARCHAR},
+      </if>
+      <if test="bookContentdes != null" >
+        #{bookContentdes,jdbcType=VARCHAR},
+      </if>
+      <if test="bookAuthordes != null" >
+        #{bookAuthordes,jdbcType=VARCHAR},
+      </if>
+      <if test="bookChapter != null" >
+        #{bookChapter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oaec.pojo.Books" >
+    update books
+    <set >
+      <if test="bookName != null" >
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookCount != null" >
+        book_count = #{bookCount,jdbcType=INTEGER},
+      </if>
+      <if test="bookAuthor != null" >
+        book_author = #{bookAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="bookFrom != null" >
+        book_from = #{bookFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="bookFromtime != null" >
+        book_fromtime = #{bookFromtime,jdbcType=VARCHAR},
+      </if>
+      <if test="bookIsbn != null" >
+        book_isbn = #{bookIsbn,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPic != null" >
+        book_pic = #{bookPic,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPrice != null" >
+        book_price = #{bookPrice,jdbcType=REAL},
+      </if>
+      <if test="bookComment != null" >
+        book_comment = #{bookComment,jdbcType=VARCHAR},
+      </if>
+      <if test="bookContentdes != null" >
+        book_contentdes = #{bookContentdes,jdbcType=VARCHAR},
+      </if>
+      <if test="bookAuthordes != null" >
+        book_authordes = #{bookAuthordes,jdbcType=VARCHAR},
+      </if>
+      <if test="bookChapter != null" >
+        book_chapter = #{bookChapter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oaec.pojo.Books" >
+    update books
+    set book_name = #{bookName,jdbcType=VARCHAR},
+      book_count = #{bookCount,jdbcType=INTEGER},
+      book_author = #{bookAuthor,jdbcType=VARCHAR},
+      book_from = #{bookFrom,jdbcType=VARCHAR},
+      book_fromtime = #{bookFromtime,jdbcType=VARCHAR},
+      book_isbn = #{bookIsbn,jdbcType=VARCHAR},
+      book_pic = #{bookPic,jdbcType=VARCHAR},
+      book_price = #{bookPrice,jdbcType=REAL},
+      book_comment = #{bookComment,jdbcType=VARCHAR},
+      book_contentdes = #{bookContentdes,jdbcType=VARCHAR},
+      book_authordes = #{bookAuthordes,jdbcType=VARCHAR},
+      book_chapter = #{bookChapter,jdbcType=VARCHAR}
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAllBooks" resultMap="BaseResultMap">
+  	select * from books
+  </select>
+  
+  
+</mapper>
