@@ -16,6 +16,8 @@ public class BookController {
 	@Autowired
 	private IBookService bookService;
 	
+	
+	
 	@RequestMapping("/index.do")
 	public String index(Map<String,Object> map){
 		List<Books> books = bookService.selectAllBooks();
